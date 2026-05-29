@@ -108,6 +108,7 @@ SRCS=(
     src/cli.c
     src/match.c
     src/init.c
+    src/ui.c
     src/rules/rules.c
     src/rules/rules_registry.c
     src/rules/rules_sudo.c

@@ -36,8 +36,10 @@ static int extract_typo(const char *error, char *out, size_t out_size)
     if (p) {
         p += 19;
         i = 0;
-        while (p[i] && p[i] != '\n' && p[i] != ' ' && i < out_size - 1)
-            out[i++] = p[i];
+        while (p[i] && p[i] != '\n' && p[i] != ' ' && i < out_size - 1) {
+            out[i] = p[i];
+            i++;
+        }
         out[i] = '\0';
         if (i > 0) return 1;
     }
@@ -47,8 +49,10 @@ static int extract_typo(const char *error, char *out, size_t out_size)
     if (p) {
         p += 17;
         i = 0;
-        while (p[i] && p[i] != '\n' && p[i] != ' ' && i < out_size - 1)
-            out[i++] = p[i];
+        while (p[i] && p[i] != '\n' && p[i] != ' ' && i < out_size - 1) {
+            out[i] = p[i];
+            i++;
+        }
         out[i] = '\0';
         if (i > 0) return 1;
     }
@@ -58,8 +62,10 @@ static int extract_typo(const char *error, char *out, size_t out_size)
     if (p) {
         p += 9;
         i = 0;
-        while (p[i] && p[i] != '\'' && i < out_size - 1)
-            out[i++] = p[i];
+        while (p[i] && p[i] != '\'' && i < out_size - 1) {
+            out[i] = p[i];
+            i++;
+        }
         out[i] = '\0';
         if (i > 0) return 1;
     }

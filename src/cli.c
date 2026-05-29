@@ -26,17 +26,6 @@ static crap_shell shell_from_name(const char *name)
     return CRP_SHELL_NONE;
 }
 
-static const char *shell_name(crap_shell s)
-{
-    switch (s) {
-    case CRP_SHELL_BASH:  return "bash";
-    case CRP_SHELL_ZSH:   return "zsh";
-    case CRP_SHELL_FISH:  return "fish";
-    case CRP_SHELL_PWSH:  return "powershell";
-    default:              return NULL;
-    }
-}
-
 void crap_usage(const char *progname)
 {
     fprintf(stderr,

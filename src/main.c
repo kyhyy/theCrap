@@ -8,6 +8,7 @@
 #include "src/cli.h"
 #include "src/shlex.h"
 #include "src/rules/rules.h"
+#include "src/ui.h"
 
 int main(int argc, const char **argv)
 {
@@ -94,7 +95,37 @@ int main(int argc, const char **argv)
             return 1;  /* exit 1 = no fixes, fish function checks $status */
         }
 
-        /* Print bare command (no "> " prefix — shell function handles display) */
+        /* Check if interactive selection is enabled */
+        const char *select_env = getenv("CRP_SELECT");
+        int ui_enabled = !(select_env && strcmp(select_env, "0") == 0);
+
+        if (ui_enabled) {
+            /* Interactive selection UI */
+            int selected = ui_select((const char **)fixes, fix_count, fix.page_size);
+
+            if (selected >= 0 && (size_t)selected < fix_count) {
+                /* User selected a suggestion */
+                printf("%s\n", fixes[selected]);
+                for (size_t i = 0; i < fix_count; i++)
+                    free(fixes[i]);
+                free(fixes);
+                return 0;
+            }
+
+            /* User cancelled — fall back to non-interactive mode */
+            size_t shown = 0;
+            for (size_t i = 0; i < fix_count; i++) {
+                if (shown >= (size_t)fix.page_size) break;
+                printf("%s\n", fixes[i]);
+                shown++;
+            }
+            for (size_t i = 0; i < fix_count; i++)
+                free(fixes[i]);
+            free(fixes);
+            return 0;
+        }
+
+        /* Non-interactive: print suggestions */
         size_t shown = 0;
         for (size_t i = 0; i < fix_count; i++) {
             if (shown >= (size_t)fix.page_size) break;
