@@ -16,6 +16,6 @@ theCrap as name suggests is a rewrite of thefuck/fixit: it's a utility that fixe
 
 - Zed editor
 - agent harness: [nimio](https://github.com/kyhyy/nimio)
-- qwen3.6:latest (07d35212591f) from ollama (which should be qwen3.6:35b if I understand correctly)
+- LLM: qwen3.6:27b
 - already mentioned ollama
 - as of 17/05/26 no additional MCP's and tools are installed
